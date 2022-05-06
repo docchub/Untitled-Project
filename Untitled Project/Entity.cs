@@ -7,7 +7,6 @@ namespace Untitled_Project
     class Entity
     {
         // Fields
-        protected List<Ability> abilities;
         protected int maxHP;
         protected int health;
         protected int damage;

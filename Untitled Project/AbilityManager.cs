@@ -6,13 +6,17 @@ namespace Untitled_Project
 {
     class AbilityManager
     {
-        private bool quick;
-        private int cost;
+        // Stack
+        public delegate void stackEffects(Entity e);
+        private event stackEffects effects;
 
         // Energy
         private int resources;
         private int enemyResources;
         private const int resourceMax = 10;
+
+        // Saves each method to a key that is called when the ability is initialized
+        private Dictionary<string, Action<Entity>> library;
 
         /// <summary>
         /// Controls the game energy system for the player
@@ -52,9 +56,6 @@ namespace Untitled_Project
             }
         }
 
-        // Saves each method to a key that is called when the ability is initialized
-        private Dictionary<string, Action<Entity>> library;
-
         public AbilityManager()
         {
             library = new Dictionary<string, Action<Entity>>();
@@ -74,6 +75,22 @@ namespace Untitled_Project
             return library;
         }
 
+        /// <summary>
+        /// Find and return an ability from the library
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public stackEffects GetAbility(string name)
+        {
+            if (library.ContainsKey(name))
+            {
+                effects += library[name].Invoke;
+                return effects;
+            }
+
+            return default;
+        }
+
         // Abilities
         #region Healing
         /// <summary>
@@ -82,10 +99,6 @@ namespace Untitled_Project
         /// <param name="self"></param>
         public void Heal(Entity self)
         {
-            // Stats
-            quick = false;
-            cost = 3;
-
             // Function
             self.Health += 20;
         }
@@ -98,19 +111,11 @@ namespace Untitled_Project
         /// <param name="self"></param>
         public void Guard(Entity self)
         {
-            // Stats
-            quick = false;
-            cost = 1;
-
             // Function
             self.Defense += 10;
         }
         public void QuickGuard(Entity self)
         {
-            // Stats
-            quick = true;
-            cost = 5;
-
             // Function
             self.Defense += 5;
         }
@@ -121,10 +126,6 @@ namespace Untitled_Project
         /// </summary>
         public void RedEngine(Entity self)
         {
-            // Stats
-            quick = false;
-            cost = 1;
-
             // Function
             self.Health -= (self.MaxHealth * 80/100);
             resources += 5;

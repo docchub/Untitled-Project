@@ -14,13 +14,17 @@ namespace Untitled_Project
 
         // Gameplay
         private bool yourTurn;
+        private KeyboardState kState;
+        private KeyboardState prevKState;
+        private MouseState mState;
+        private MouseState prevMState;
 
         // Stack
         private Stack<Ability> stack;
 
         // Abilities
-        private AbilityManager library;
-        private Dictionary<string, Action<Entity>> dictionary;
+        private AbilityManager abManager;
+        private Dictionary<string, Action<Entity>> library;
 
         // Characters
         private Entity player;
@@ -45,15 +49,17 @@ namespace Untitled_Project
 
         protected override void Initialize()
         {
-            // Initialize Combat
-            yourTurn = true;
-            
             // Initialize stack
             stack = new Stack<Ability>();
 
             // Initialize Abilities
-            library = new AbilityManager();
-            dictionary = library.CreateLibrary();
+            abManager = new AbilityManager();
+            library = abManager.CreateLibrary();
+
+            // Initialize Combat
+            yourTurn = true;
+            abManager.Resources = 10;
+            abManager.EnemyResources = 10;
 
             // Characters
             player = new Entity(100, 10, "John");
@@ -92,7 +98,14 @@ namespace Untitled_Project
                 Exit();
 
             // TODO: Add your update logic here
+            kState = Keyboard.GetState();
 
+            if (SingleKeyPress(Keys.Enter, kState))
+            {
+
+            }
+
+            prevKState = kState;
             base.Update(gameTime);
         }
 
@@ -105,12 +118,12 @@ namespace Untitled_Project
             // ----------- Debugging Code -----------
             _spriteBatch.DrawString(
                 headline, 
-                String.Format("Energy: {0}", library.Resources), 
+                String.Format("Energy: {0}", abManager.Resources), 
                 new Vector2(290, 10), 
                 Color.DarkCyan);
             _spriteBatch.DrawString(
                 debug,
-                String.Format("[Energy: {0}]", library.EnemyResources),
+                String.Format("[Energy: {0}]", abManager.EnemyResources),
                 new Vector2(670, 280),
                 Color.DarkCyan);
 
@@ -155,9 +168,31 @@ namespace Untitled_Project
         }
 
         // Methods
+        /// <summary>
+        /// Return true only when a key is first pressed
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="currentKbState"></param>
+        /// <returns></returns>
+        public bool SingleKeyPress(Keys key, KeyboardState currentKbState)
+        {
+            if (true)
+            {
+                if (currentKbState.IsKeyDown(key) && prevKState.IsKeyUp(key))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Resolve the ability on top of the stack
+        /// </summary>
         private void PlayStack()
         {
-
+            stack.Peek();
         }
     }
 }
