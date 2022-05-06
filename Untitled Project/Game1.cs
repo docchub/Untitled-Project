@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,6 +12,9 @@ namespace Untitled_Project
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        // Stack
+        private Stack<Ability> stack;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -18,7 +24,8 @@ namespace Untitled_Project
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // Initialize stack
+            stack = new Stack<Ability>();
 
             base.Initialize();
         }
@@ -47,6 +54,12 @@ namespace Untitled_Project
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        // Methods
+        private void PlayStack()
+        {
+
         }
     }
 }
