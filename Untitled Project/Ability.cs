@@ -9,20 +9,20 @@ namespace Untitled_Project
         // Fields
         private bool quick;
         private int cost;
+        private string name;
 
         // Stack
-        public delegate void stackEffects();
+        public delegate void stackEffects(Entity e);
         private event stackEffects effects;
 
         // Properties
         public bool Quick { get { return quick; } }
         public int Cost { get { return cost; } }
+        public string Name { get { return name; } }
 
         // Constructor
-        public Ability(bool quick, int cost)
+        public Ability(string name)
         {
-            this.quick = quick;
-            this.cost = cost;
         }
     }
 }

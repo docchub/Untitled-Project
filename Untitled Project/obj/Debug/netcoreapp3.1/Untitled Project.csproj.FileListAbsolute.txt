@@ -1,0 +1,27 @@
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.csproj.AssemblyReference.cache
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.AssemblyInfoInputs.cache
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.AssemblyInfo.cs
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.csproj.CoreCompileInputs.cache
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Content\Debug.xnb
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Untitled Project.exe
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Untitled Project.deps.json
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Untitled Project.runtimeconfig.json
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Untitled Project.runtimeconfig.dev.json
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Untitled Project.dll
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Untitled Project.pdb
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libopenal.so.1
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\osx\native\libSDL2-2.0.0.dylib
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\osx\native\libopenal.1.dylib
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\SDL2.dll
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\soft_oal.dll
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\SDL2.dll
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\soft_oal.dll
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.csproj.CopyComplete
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.dll
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.pdb
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.genruntimeconfig.cache
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Content\debugfont.xnb
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Content\headline.xnb
