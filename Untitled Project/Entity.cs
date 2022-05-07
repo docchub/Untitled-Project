@@ -7,11 +7,12 @@ namespace Untitled_Project
     class Entity
     {
         // Fields
-        protected int maxHP;
-        protected int health;
-        protected int damage;
-        protected int defense;
+        private int maxHP;
+        private int health;
+        private int damage;
+        private int defense;
         private string name;
+        private List<Ability> abilities;
 
         // Properties
         public int MaxHealth { get { return maxHP; } }
@@ -46,14 +47,17 @@ namespace Untitled_Project
         public int Defense { get { return defense; } set { defense = value; } }
         public string Name { get { return name; } }
 
+        public List<Ability> Abilities { get { return abilities; } set { abilities = value; } }
+
         // Constructor
         public Entity(int maxHP, int damage, string name)
         {
             this.maxHP = maxHP;
-            this.health = maxHP;
             this.damage = damage;
             this.name = name;
+            health = maxHP;
             defense = 0;
+            abilities = new List<Ability>();
         }
     }
 }

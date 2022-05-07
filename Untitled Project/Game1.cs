@@ -14,6 +14,9 @@ namespace Untitled_Project
 
         // Gameplay
         private bool yourTurn;
+        private List<Button> buttons;
+        private Entity selected;
+        private Entity target;
         private KeyboardState kState;
         private KeyboardState prevKState;
         private MouseState mState;
@@ -26,6 +29,7 @@ namespace Untitled_Project
         private AbilityManager abManager;
         private Dictionary<string, Action<Entity>> library;
         private Dictionary<string, string[]> infoLibrary;
+        private const int resourceMax = 10;
 
         // Characters
         private Entity player;
@@ -60,8 +64,14 @@ namespace Untitled_Project
 
             // Initialize Combat
             yourTurn = true;
-            abManager.Resources = 10;
-            abManager.EnemyResources = 10;
+            abManager.Resources = resourceMax;
+            abManager.EnemyResources = resourceMax;
+
+            // Abilities
+            Ability heal = new Ability("Heal", abManager);
+            Ability guard = new Ability("Guard", abManager);
+            Ability quickGuard = new Ability("Quick Guard", abManager);
+            Ability redEngine = new Ability("Red Engine", abManager);
 
             // Characters
             player = new Entity(100, 10, "John");
@@ -74,13 +84,27 @@ namespace Untitled_Project
             players = new List<Entity>();
             enemies = new List<Entity>();
 
+            // Add characters to requisite lists
             players.Add(player);
             players.Add(player2);
             players.Add(player3);
-
             enemies.Add(enemy);
             enemies.Add(enemy2);
             enemies.Add(enemy3);
+
+            // Assign abilities
+            player.Abilities.Add(heal);
+            player.Abilities.Add(guard);
+            player2.Abilities.Add(guard);
+            player2.Abilities.Add(quickGuard);
+            player3.Abilities.Add(heal);
+            player3.Abilities.Add(redEngine);
+
+            // Select Character
+            buttons = new List<Button>();
+            buttons.Add(new Button(new Rectangle(35, 35, 110, 65), player));
+            buttons.Add(new Button(new Rectangle(35, 115, 110, 65), player2));
+            buttons.Add(new Button(new Rectangle(35, 195, 110, 65), player3));
 
             base.Initialize();
         }
@@ -101,13 +125,48 @@ namespace Untitled_Project
 
             // TODO: Add your update logic here
             kState = Keyboard.GetState();
+            mState = Mouse.GetState();
 
+            // Pop the stack and resolve an ability
             if (SingleKeyPress(Keys.Enter, kState))
             {
+                if (stack.Count > 0)
+                {
+                    PlayStack();
+                }
+                else if (stack.Count == 0)
+                {
+                    yourTurn = !yourTurn;
+                }
+            }
 
+            // Highlights buttons when hovered over
+            foreach (Button b in buttons)
+            {
+                // Don't change color if the button is currently selected
+                if (b.Rect.Contains(mState.Position) && selected != b.Selected)
+                {
+                    b.Color = Color.LightSalmon;
+                }
+                else if (selected != b.Selected)
+                {
+                    b.Color = Color.White;
+                }
+
+                // Select a character when you click on the button
+                if (mState.LeftButton == ButtonState.Pressed &&
+                    prevMState.LeftButton != ButtonState.Pressed &&
+                    b.Rect.Contains(mState.Position))
+                {
+                    b.Color = Color.Salmon;
+
+                    // Update the character the user is examining
+                    selected = b.Selected;
+                }
             }
 
             prevKState = kState;
+            prevMState = mState;
             base.Update(gameTime);
         }
 
@@ -115,9 +174,19 @@ namespace Untitled_Project
         {
             GraphicsDevice.Clear(Color.LightBlue);
 
-            _spriteBatch.Begin();
+            // ------------ ShapeBatch --------------
+            ShapeBatch.Begin(GraphicsDevice);
+
+            // Draw the buttons
+            foreach (Button b in buttons)
+            {
+                ShapeBatch.Box(b.Rect, b.Color);
+            }
+
+            ShapeBatch.End();
 
             // ----------- Debugging Code -----------
+            _spriteBatch.Begin();
             _spriteBatch.DrawString(
                 headline, 
                 String.Format("Energy: {0}", abManager.Resources), 
@@ -126,9 +195,10 @@ namespace Untitled_Project
             _spriteBatch.DrawString(
                 debug,
                 String.Format("[Energy: {0}]", abManager.EnemyResources),
-                new Vector2(720, 5),
-                Color.DarkCyan);
+                new Vector2(715, 5),
+                Color.DarkCyan);            
 
+            // Writes player data to the screen
             int count = 0;
             foreach (Entity e in players)
             {
@@ -147,6 +217,7 @@ namespace Untitled_Project
                 count++;
             }
 
+            // Writes enemy data to the screen
             count = 0;
             foreach (Entity e in enemies)
             {
@@ -163,6 +234,16 @@ namespace Untitled_Project
                     Color.Black);
 
                 count++;
+            }
+
+            // Print message if the stack is empty
+            if (stack.Count == 0)
+            {
+                _spriteBatch.DrawString(
+                    debug,
+                    String.Format("Stack is Empty"),
+                    new Vector2(340, 350),
+                    Color.DimGray);
             }
 
             _spriteBatch.End();
@@ -196,9 +277,10 @@ namespace Untitled_Project
         {
             Ability current = null;
 
-            if (stack.Peek() != null)
+            if (stack.Count > 0)
             {
-                current = stack.Peek();
+                current = stack.Pop();
+                current.Effect.Invoke(target);
             }
         }
     }

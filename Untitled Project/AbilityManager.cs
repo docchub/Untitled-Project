@@ -35,7 +35,7 @@ namespace Untitled_Project
             set
             {
                 // Cannot be reduced below 0 or above MAX
-                if (resources + value < resourceMax && resources + value > 0)
+                if (resources + value <= resourceMax && resources + value >= 0)
                 {
                     resources = value;
                 }
@@ -52,7 +52,7 @@ namespace Untitled_Project
             set
             {
                 // Cannot be reduced below 0 or above MAX
-                if (enemyResources + value < resourceMax && enemyResources + value > 0)
+                if (enemyResources + value <= resourceMax && enemyResources + value >= 0)
                 {
                     enemyResources = value;
                 }
