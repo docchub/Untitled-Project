@@ -25,6 +25,7 @@ namespace Untitled_Project
         // Abilities
         private AbilityManager abManager;
         private Dictionary<string, Action<Entity>> library;
+        private Dictionary<string, string[]> infoLibrary;
 
         // Characters
         private Entity player;
@@ -54,7 +55,8 @@ namespace Untitled_Project
 
             // Initialize Abilities
             abManager = new AbilityManager();
-            library = abManager.CreateLibrary();
+            library = abManager.BuildFunctionLibrary();
+            infoLibrary = abManager.BuildInfoLibrary();
 
             // Initialize Combat
             yourTurn = true;
@@ -124,7 +126,7 @@ namespace Untitled_Project
             _spriteBatch.DrawString(
                 debug,
                 String.Format("[Energy: {0}]", abManager.EnemyResources),
-                new Vector2(670, 280),
+                new Vector2(720, 5),
                 Color.DarkCyan);
 
             int count = 0;
