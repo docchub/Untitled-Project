@@ -1,4 +1,4 @@
-Heal|0|4
-Guard|0|0
-Quick Guard|1|5
-Red Engine|0|1
+Heal|false|4
+Guard|false|0
+Quick Guard|true|5
+Red Engine|false|1

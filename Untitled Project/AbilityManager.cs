@@ -63,12 +63,6 @@ namespace Untitled_Project
             }
         }
 
-        /// <summary>
-        /// Access the library anywhere
-        /// </summary>
-        public Dictionary<string, Action<Entity>> FuncLibrary { get { return functionLibrary; } }
-        public Dictionary<string, string[]> InfoLibrary { get { return infoLibrary; } }
-
         public AbilityManager()
         {
             functionLibrary = new Dictionary<string, Action<Entity>>();

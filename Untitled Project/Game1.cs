@@ -176,7 +176,7 @@ namespace Untitled_Project
         /// <param name="key"></param>
         /// <param name="currentKbState"></param>
         /// <returns></returns>
-        public bool SingleKeyPress(Keys key, KeyboardState currentKbState)
+        private bool SingleKeyPress(Keys key, KeyboardState currentKbState)
         {
             if (true)
             {
@@ -194,7 +194,12 @@ namespace Untitled_Project
         /// </summary>
         private void PlayStack()
         {
-            stack.Peek();
+            Ability current = null;
+
+            if (stack.Peek() != null)
+            {
+                current = stack.Peek();
+            }
         }
     }
 }

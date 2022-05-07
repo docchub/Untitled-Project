@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Untitled_Project
 {
-    class Ability : AbilityManager
+    class Ability
     {
         // Function
-        private event stackEffects ability;
+        private event AbilityManager.stackEffects ability;
 
         // Data
         private string[] data;
@@ -21,16 +21,16 @@ namespace Untitled_Project
         public string Name { get { return name; } }
         public bool Quick { get { return quick; } }
         public int Cost { get { return cost; } }
-        public stackEffects Effect { get { return ability; } }
+        public AbilityManager.stackEffects Effect { get { return ability; } }
 
         // Constructor
-        public Ability(string name)
+        public Ability(string name, AbilityManager abm)
         {
             // Build the function of the ability
-            ability += GetAbility(name);
+            ability += abm.GetAbility(name);
 
             // Get cost and misc data
-            data = GetAbilityInfo(name);
+            data = abm.GetAbilityInfo(name);
             this.name = data[0];
             quick = bool.Parse(data[1]);
             cost = int.Parse(data[2]);
