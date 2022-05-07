@@ -4,10 +4,12 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/davin/Desktop/Untitled Project/Untitled Project/Content/abilitytext.spritefont</File>
     <File>C:/Users/davin/Desktop/Untitled Project/Untitled Project/Content/debugfont.spritefont</File>
     <File>C:/Users/davin/Desktop/Untitled Project/Untitled Project/Content/headline.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

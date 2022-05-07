@@ -25,3 +25,4 @@ C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1
 C:\Users\davin\Desktop\Untitled Project\Untitled Project\obj\Debug\netcoreapp3.1\Untitled Project.genruntimeconfig.cache
 C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Content\debugfont.xnb
 C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Content\headline.xnb
+C:\Users\davin\Desktop\Untitled Project\Untitled Project\bin\Debug\netcoreapp3.1\Content\abilitytext.xnb

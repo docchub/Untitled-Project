@@ -15,7 +15,9 @@ namespace Untitled_Project
         // Gameplay
         private bool yourTurn;
         private List<Button> buttons;
+        private List<Button> abilityButtons;
         private Entity selected;
+        private Entity prevSelected;
         private Entity target;
         private KeyboardState kState;
         private KeyboardState prevKState;
@@ -44,6 +46,7 @@ namespace Untitled_Project
         // Fonts
         private SpriteFont debug;
         private SpriteFont headline;
+        private SpriteFont abilityText;
 
         public Game1()
         {
@@ -99,12 +102,19 @@ namespace Untitled_Project
             player2.Abilities.Add(quickGuard);
             player3.Abilities.Add(heal);
             player3.Abilities.Add(redEngine);
+            player3.Abilities.Add(guard);
 
             // Select Character
             buttons = new List<Button>();
             buttons.Add(new Button(new Rectangle(35, 35, 110, 65), player));
             buttons.Add(new Button(new Rectangle(35, 115, 110, 65), player2));
             buttons.Add(new Button(new Rectangle(35, 195, 110, 65), player3));
+
+            // Select Abilities
+            abilityButtons = new List<Button>();
+            abilityButtons.Add(new Button(new Rectangle(70, 290, 200, 40)));
+            abilityButtons.Add(new Button(new Rectangle(70, 340, 200, 40)));
+            abilityButtons.Add(new Button(new Rectangle(70, 390, 200, 40)));
 
             base.Initialize();
         }
@@ -116,6 +126,7 @@ namespace Untitled_Project
             // TODO: use this.Content to load your game content here
             debug = Content.Load<SpriteFont>("debugfont");
             headline = Content.Load<SpriteFont>("headline");
+            abilityText = Content.Load<SpriteFont>("abilitytext");
         }
 
         protected override void Update(GameTime gameTime)
@@ -143,28 +154,19 @@ namespace Untitled_Project
             // Highlights buttons when hovered over
             foreach (Button b in buttons)
             {
-                // Don't change color if the button is currently selected
-                if (b.Rect.Contains(mState.Position) && selected != b.Selected)
-                {
-                    b.Color = Color.LightSalmon;
-                }
-                else if (selected != b.Selected)
-                {
-                    b.Color = Color.White;
-                }
+                HighlightButton(b);
+            }
 
-                // Select a character when you click on the button
-                if (mState.LeftButton == ButtonState.Pressed &&
-                    prevMState.LeftButton != ButtonState.Pressed &&
-                    b.Rect.Contains(mState.Position))
+            // Ability buttons
+            if (selected != null)
+            {
+                foreach (Button b in abilityButtons)
                 {
-                    b.Color = Color.Salmon;
-
-                    // Update the character the user is examining
-                    selected = b.Selected;
+                    HighlightButton(b);
                 }
             }
 
+            prevSelected = selected;
             prevKState = kState;
             prevMState = mState;
             base.Update(gameTime);
@@ -181,6 +183,21 @@ namespace Untitled_Project
             foreach (Button b in buttons)
             {
                 ShapeBatch.Box(b.Rect, b.Color);
+            }
+
+            // Show player abilities
+            if (selected != null)
+            {
+                foreach (Button b in abilityButtons)
+                {
+                    ShapeBatch.Box(b.Rect, b.Color);
+                    ShapeBatch.Circle(
+                        new Vector2(
+                            b.Rect.X - 30, 
+                            b.Rect.Y + 20), 
+                        20, 
+                        Color.DarkSalmon);
+                }
             }
 
             ShapeBatch.End();
@@ -246,6 +263,42 @@ namespace Untitled_Project
                     Color.DimGray);
             }
 
+            // Print message that shows if it is your turn
+            if (yourTurn)
+            {
+                _spriteBatch.DrawString(
+                    debug,
+                    String.Format("(Your Turn)"),
+                    new Vector2(355, 370),
+                    Color.LightCoral);
+            }
+
+            // Ability button text
+            if (selected != null)
+            {
+                int i = 0;
+                
+                foreach (Ability a in selected.Abilities)
+                {
+                    _spriteBatch.DrawString(
+                        abilityText,
+                        String.Format(a.Name),
+                        new Vector2(abilityButtons[i].Rect.X + 5, abilityButtons[i].Rect.Y + 5),
+                        Color.Black);
+
+                    _spriteBatch.DrawString(
+                        abilityText, 
+                        String.Format("{0}", a.Cost), 
+                        new Vector2(abilityButtons[i].Rect.X - 38, abilityButtons[i].Rect.Y + 5), 
+                        Color.Black);
+
+                    if (i < 2)
+                    {
+                        i++;
+                    }
+                }
+            }
+
             _spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -281,6 +334,34 @@ namespace Untitled_Project
             {
                 current = stack.Pop();
                 current.Effect.Invoke(target);
+            }
+        }
+
+        /// <summary>
+        /// Highlights and selects a button when you hover or click it
+        /// </summary>
+        /// <param name="b"></param>
+        private void HighlightButton(Button b)
+        {
+            // Don't change color if the button is currently selected
+            if (b.Rect.Contains(mState.Position) && selected != b.Selected)
+            {
+                b.Color = Color.LightSalmon;
+            }
+            else if (selected != b.Selected)
+            {
+                b.Color = Color.White;
+            }
+
+            // Select a character when you click on the button
+            if (mState.LeftButton == ButtonState.Pressed &&
+                prevMState.LeftButton != ButtonState.Pressed &&
+                b.Rect.Contains(mState.Position))
+            {
+                b.Color = Color.Salmon;
+
+                // Update the character the user is examining
+                selected = b.Selected;
             }
         }
     }

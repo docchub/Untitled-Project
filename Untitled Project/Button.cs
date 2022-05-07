@@ -27,6 +27,21 @@ namespace Untitled_Project
         public Entity Selected { get { return selected; } }
 
         // Constructor
+        /// <summary>
+        /// Ability buttons
+        /// </summary>
+        /// <param name="rect"></param>
+        public Button(Rectangle rect)
+        {
+            color = Color.White;
+            this.rect = rect;
+        }
+
+        /// <summary>
+        /// Player buttons
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="selected"></param>
         public Button(Rectangle rect, Entity selected)
         {
             color = Color.White;
